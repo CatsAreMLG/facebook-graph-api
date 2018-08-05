@@ -1,0 +1,20 @@
+$(document).ready(function() {
+  $.ajaxSetup({ cache: true });
+  $.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
+    FB.init({
+      appId: '<%= ENV["FACEBOOK_APP_ID"] %>',
+      version: 'v2.7' // or v2.1, v2.2, v2.3, ...
+    });
+    FB.api(
+      '/me',
+      'GET',
+      {"fields":"feed.limit(3){description,message,full_picture,attachments}"},
+      function(response) {
+          console.log(message);
+          console.log('he');
+      }
+    );
+    $('#loginbutton,#feedbutton').removeAttr('disabled');
+    FB.getLoginStatus(updateStatusCallback);
+  });
+});
