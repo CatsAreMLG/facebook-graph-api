@@ -7,7 +7,9 @@ class User < ApplicationRecord
       user.save
     end
   end
-  def facebook
-    @facebook ||= Koala::Facebook::API.new(oauth_token)
+  def self.koala(auth)
+    access_token = auth['token']
+    facebook = Koala::Facebook::API.new(access_token)
+    facebook.get_object("me?fields=name,picture")
   end
 end
