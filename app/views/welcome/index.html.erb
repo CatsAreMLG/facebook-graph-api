@@ -1,10 +1,8 @@
 <div class="user_nav">
-
-  <% if @user %>
-    <%= image_tag @user['picture']['data']['url'].to_s %>
-    <%= @user['name'] %>
+  <% if current_user %>
+    Signed in as <strong><%= current_user.name %></strong>!
+    <%= link_to "Sign Out", signout_path, id: "sign_out" %>
   <% else%>
     <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
   <% end %>
-
 </div>
